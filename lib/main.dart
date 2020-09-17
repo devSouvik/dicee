@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:shake/shake.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.red,
           title: Center(
-            child: Text('Dice Roll'),
+            child: Text('Dicee'),
           ),
         ),
         body: DicePage(),
@@ -32,13 +33,14 @@ class DicePage extends StatefulWidget {
 class _DicePageState extends State<DicePage> {
   int leftDiceNumber = 1;
   int rightDiceNumber = 1;
-  void changeDiceFace(){
+  void changeDiceFace() {
     setState(() {
       leftDiceNumber = Random().nextInt(6) + 1;
       rightDiceNumber = Random().nextInt(6) + 1;
       print('right');
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -47,7 +49,12 @@ class _DicePageState extends State<DicePage> {
           Expanded(
             child: FlatButton(
               onPressed: () {
-                changeDiceFace();
+//                changeDiceFace();
+                ShakeDetector detector =
+                    ShakeDetector.autoStart(onPhoneShake: () {
+                  // Do stuff on phone shake
+                  changeDiceFace();
+                });
               },
               child: Image.asset('images/dice$leftDiceNumber.png'),
             ),
@@ -55,7 +62,11 @@ class _DicePageState extends State<DicePage> {
           Expanded(
             child: FlatButton(
               onPressed: () {
-                changeDiceFace();
+                ShakeDetector detector =
+                    ShakeDetector.autoStart(onPhoneShake: () {
+                  // Do stuff on phone shake
+                  changeDiceFace();
+                });
               },
               child: Image.asset('images/dice$rightDiceNumber.png'),
             ),
