@@ -1,4 +1,5 @@
 # dice_rolling
 
-A new Flutter application.
+shake your phone to roll the dice 
+
 
